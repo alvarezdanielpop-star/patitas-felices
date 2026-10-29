@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patitas Felices 🐾</title>
+
+<style>
+:root {
+  --naranja: #f28c28;
+  --azul: #159bc1;
+  --celeste: #e8f8fc;
+  --crema: #fff7e8;
+  --texto: #344554;
+  --verde: #20b486;
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--texto);
+  background: var(--crema);
+}
+
+header {
+  background: white;
+  padding: 18px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  box-shadow: 0 3px 15px #0000000d;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  color: var(--naranja);
+  font-size: 27px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: var(--azul);
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 17px;
+}
+
+nav a {
+  color: var(--texto);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  transition: color .25s, transform .25s;
+}
+
+nav a:hover {
+  color: var(--naranja);
+  transform: translateY(-3px);
+}
+
+section {
+  padding: 45px 7%;
+  scroll-margin-top: 90px;
+}
+
+.hero {
+  background: linear-gradient(120deg, #fff0d7, #dff7ff);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  min-height: 350px;
+  overflow: hidden;
+}
+
+.hero h1 {
+  color: var(--naranja);
+  font-size: clamp(35px, 5vw, 55px);
+  margin: 0 0 15px;
+}
+
+.hero p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.hero img {
+  width: min(46%, 450px);
+  border-radius: 28px;
+  animation: flotar 4s ease-in-out infinite;
+}
+
+.boton {
+  display: inline-block;
+  border: none;
+  border-radius: 30px;
+  background: var(--naranja);
+  color: white;
+  padding: 13px 23px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .25s, box-shadow .25s, background .25s;
+}
+
+.boton:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 9px 18px #f28c2850;
+  background: #e87912;
+}
+
+.boton:active {
+  transform: scale(.95);
+}
+
+h2 {
+  font-size: 30px;
+  color: var(--azul);
+  margin: 0 0 10px;
+}
+
+.subtitulo {
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+.servicios {
+  background: var(--celeste);
+}
+
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 22px;
+}
+
+.tarjeta {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 5px 18px #17465c10;
+  transition: transform .3s, box-shadow .3s;
+  position: relative;
+}
+
+.tarjeta:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 25px #17465c20;
+}
+
+.tarjeta img {
+  width: 100%;
+  height: 175px;
+  object-fit: cover;
+  display: block;
+  transition: transform .45s;
+}
+
+.tarjeta:hover img {
+  transform: scale(1.06);
+}
+
+.tarjeta-contenido {
+  padding: 18px;
+}
+
+.tarjeta h3 {
+  margin-top: 0;
+}
+
+.tienda {
+  background: linear-gradient(180deg, #fffaf1, #fff4e4);
+}
+
+.producto {
+  background: white;
+  border-radius: 18px;
+  padding: 13px;
+  box-shadow: 0 5px 18px #0000000b;
+  position: relative;
+  transition: transform .3s, box-shadow .3s;
+}
+
+.producto:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 14px 25px #f28c2825;
+}
+
+.producto img {
+  width: 100%;
+  height: 155px;
+  object-fit: cover;
+  border-radius: 13px;
+  transition: transform .4s;
+}
+
+.producto:hover img {
+  transform: scale(1.05);
+}
+
+.producto h3 {
+  font-size: 17px;
+  margin-bottom: 7px;
+}
+
+.precio {
+  color: var(--azul);
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.producto .boton {
+  width: 100%;
+  padding: 11px 8px;
+  margin-top: 7px;
+}
+
+.etiqueta {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--naranja);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  z-index: 1;
+}
+
+.paneles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 25px;
+  align-items: start;
+  background: #f0fbfd;
+}
+
+.panel {
+  padding: 24px;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 5px 18px #0000000b;
+}
+
+.panel h2 {
+  font-size: 25px;
+}
+
+.item-carrito {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e6edf0;
+}
+
+.item-carrito img {
+  width: 58px;
+  height: 58px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-info p {
+  margin: 5px 0;
+  font-size: 13px;
+}
+
+.cantidad {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.cantidad button,
+.eliminar {
+  cursor: pointer;
+  border: none;
+  background: #eaf7fa;
+  border-radius: 8px;
+  padding: 7px 10px;
+  transition: background .2s, transform .2s;
+}
+
+.cantidad button:hover,
+.eliminar:hover {
+  background: #c9edf6;
+  transform: scale(1.08);
+}
+
+.total {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--azul);
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.pagar {
+  background: var(--verde);
+  width: 100%;
+  font-size: 16px;
+}
+
+.pagar:hover {
+  background: #159b72;
+  box-shadow: 0 9px 18px #20b48640;
+}
+
+.vaciar {
+  width: 100%;
+  background: white;
+  color: var(--azul);
+  border: 1px solid var(--azul);
+  margin-top: 10px;
+}
+
+.vaciar:hover {
+  background: var(--celeste);
+  box-shadow: none;
+}
+
+form {
+  display: grid;
+  gap: 13px;
+}
+
+label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d5e0e5;
+  border-radius: 10px;
+  margin-top: 6px;
+  font: inherit;
+  background: white;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid #9bdcec;
+  border-color: var(--azul);
+}
+
+textarea {
+  resize: vertical;
+}
+
+.patitas {
+  text-align: center;
+  font-size: 25px;
+  letter-spacing: 12px;
+  margin: 20px 0;
+  animation: aparecer 2s ease-in-out infinite alternate;
+}
+
+footer {
+  background: var(--azul);
+  color: white;
+  text-align: center;
+  padding: 30px 15px;
+}
+
+footer p {
+  margin: 8px;
+}
+
+.mensaje {
+  color: #16845f;
+  font-weight: bold;
+  min-height: 20px;
+  font-size: 14px;
+}
+
+.animar-carrito {
+  animation: rebote .45s ease;
+}
+
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+
+@keyframes rebote {
+  0%, 100% { transform: scale(1); }
+  35% { transform: scale(1.08) rotate(-2deg); }
+  70% { transform: scale(.97) rotate(2deg); }
+}
+
+@keyframes aparecer {
+  from { opacity: .65; transform: translateY(0); }
+  to { opacity: 1; transform: translateY(-5px); }
+}
+
+@media (max-width: 650px) {
+  header {
+    justify-content: center;
+  }
+
+  nav {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero img {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  section {
+    padding: 35px 5%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🐾 Patitas <span>Felices</span></div>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#tienda">Tienda</a>
+    <a href="#carrito">🛒 Carrito (<span id="contador">0</span>)</a>
+    <a href="#turno">Reservar turno</a>
+  </nav>
+</header>
+
+<section class="hero" id="inicio">
+  <div>
+    <h1>¡Bienvenidos a Patitas Felices! 🐶</h1>
+    <p>Todo el amor y cuidado que tu mejor amigo merece.</p>
+    <a href="#turno" class="boton">🐾 Reservar un turno</a>
+  </div>
+
+  <img
+    src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=85"
+    alt="Perro feliz"
+  >
+</section>
+
+<section class="servicios" id="servicios">
+  <h2>Nuestros servicios 🐾</h2>
+  <p class="subtitulo">Cuidamos a tu mascota en cada detalle.</p>
+
+  <div class="grilla">
+    <article class="tarjeta">
+      <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=700&q=80" alt="Baño para perros">
+      <div class="tarjeta-contenido">
+        <h3>🫧 Baño canino</h3>
+        <p>Limpieza, secado y cepillado para que siempre esté increíble.</p>
+        <a href="#turno" class="boton">Consultar</a>
+      </div>
+    </article>
+
+    <article class="tarjeta">
+      <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=700&q=80" alt="Cuidado de mascotas">
+      <div class="tarjeta-contenido">
+        <h3>✂️ Peluquería</h3>
+        <p>Cortes, arreglo del pelo y cuidado personalizado.</p>
+        <a href="#turno" class="boton">Consultar</a>
+      </div>
+    </article>
+
+    <article class="tarjeta">
+      <img src="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=700&q=80" alt="Accesorios para mascotas">
+      <div class="tarjeta-contenido">
+        <h3>🦴 Tienda</h3>
+        <p>Alimentos, juguetes y accesorios para tus compañeros.</p>
+        <a href="#tienda" class="boton">Ver productos</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="tienda" id="tienda">
+  <h2>🛍️ Nuestra tienda</h2>
+  <p class="subtitulo">Productos seleccionados para su bienestar.</p>
+
+  <div class="grilla" id="productos"></div>
+</section>
+
+<section class="paneles">
+  <div class="panel" id="carrito">
+    <h2>🛒 Tu carrito</h2>
+    <div id="lista-carrito"></div>
+    <p id="vacio">Todavía no agregaste productos. 🐾</p>
+
+    <div class="total">
+      <span>Total:</span>
+      <span id="total">$ 0</span>
+    </div>
+
+    <button class="boton pagar" onclick="pagar()">
+      💳 Pagar con Mercado Pago
+    </button>
+
+    <button class="boton vaciar" onclick="vaciarCarrito()">
+      🗑️ Vaciar carrito
+    </button>
+
+    <p id="mensaje-pago" class="mensaje"></p>
+    <p style="font-size:12px;color:#647782">
+      🔒 En una tienda real, el pago se debe integrar de forma segura.
+    </p>
+  </div>
+
+  <div class="panel" id="turno">
+    <h2>🐶 Reservá tu turno</h2>
+    <p>Completá tus datos y envianos tu consulta por WhatsApp.</p>
+
+    <form id="form-turno">
+      <label>
+        Tu nombre *
+        <input type="text" id="nombre" placeholder="Nombre completo" required>
+      </label>
+
+      <label>
+        Tu teléfono *
+        <input type="tel" id="telefono" placeholder="Tu número de teléfono" required>
+      </label>
+
+      <label>
+        Nombre de tu mascota *
+        <input type="text" id="mascota" placeholder="Nombre de tu perro" required>
+      </label>
+
+      <label>
+        Servicio *
+        <select id="servicio" required>
+          <option value="">Elegí un servicio</option>
+          <option>Baño canino</option>
+          <option>Peluquería</option>
+          <option>Baño y peluquería</option>
+          <option>Consulta por productos</option>
+        </select>
+      </label>
+
+      <label>
+        Fecha deseada *
+        <input type="date" id="fecha" required>
+      </label>
+
+      <label>
+        Comentarios
+        <textarea id="comentarios" rows="3" placeholder="Contanos algo más..."></textarea>
+      </label>
+
+      <button type="submit" class="boton">💬 Enviar por WhatsApp</button>
+    </form>
+  </div>
+</section>
+
+<div class="patitas">🐾 🐾 🐾 🐾 🐾</div>
+
+<footer>
+  <h2 style="color:white">🐾 Patitas Felices</h2>
+  <p>Pel uquería • Baño • Tienda • Accesorios</p>
+  <p>Hecho con amor para quienes más queremos. ❤️</p>
+  <p>© 2026 Patitas Felices</p>
+</footer>
+
+<script>
+const productos = [
+  {
+    id: 1,
+    nombre: "Alimento premium",
+    descripcion: "Alimento para perros",
+    precio: 18000,
+    imagen: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    id: 2,
+    nombre: "Juguete divertido",
+    descripcion: "Para jugar y morder",
+    precio: 5000,
+    imagen: "https://images.unsplash.com/photo-1535294435445-d7249524ef2e?auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    id: 3,
+    nombre: "Collar ajustable",
+    descripcion: "Cómodo y resistente",
+    precio: 7500,
+    imagen: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    id: 4,
+    nombre: "Pelota de goma",
+    descripcion: "Ideal para jugar",
+    precio: 3500,
+    imagen: "https://images.unsplash.com/photo-1535294435445-d7249524ef2e?auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    id: 5,
+    nombre: "Premios naturales",
+    descripcion: "Snacks para mascotas",
+    precio: 4000,
+    imagen: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    id: 6,
+    nombre: "Correa resistente",
+    descripcion: "Para paseos seguros",
+    precio: 4000,
+    imagen: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=80"
+  }
+];
+
+let carrito = [];
+
+function dinero(valor) {
+  return "$ " + valor.toLocaleString("es-AR");
+}
+
+function mostrarProductos() {
+  const contenedor = document.getElementById("productos");
+
+  contenedor.innerHTML = productos.map(producto => `
+    <article class="producto">
+      <span class="etiqueta">🐾 Favorito</span>
+      <img src="${producto.imagen}" alt="${producto.nombre}">
+      <h3>${producto.nombre}</h3>
+      <p>${producto.descripcion}</p>
+      <div class="precio">${dinero(producto.precio)}</div>
+      <button class="boton" onclick="agregar(${producto.id})">
+        🛒 Agregar al carrito
+      </button>
+    </article>
+  `).join("");
+}
+
+function agregar(id) {
+  const producto = productos.find(p => p.id === id);
+  const existente = carrito.find(p => p.id === id);
+
+  if (existente) {
+    existente.cantidad++;
+  } else {
+    carrito.push({...producto, cantidad: 1});
+  }
+
+  const panel = document.getElementById("carrito");
+  panel.classList.remove("animar-carrito");
+  void panel.offsetWidth;
+  panel.classList.add("animar-carrito");
+
+  mostrarCarrito();
+}
+
+function cambiarCantidad(id, cambio) {
+  const producto = carrito.find(p => p.id === id);
+  if (!producto) return;
+
+  producto.cantidad += cambio;
+
+  if (producto.cantidad <= 0) {
+    carrito = carrito.filter(p => p.id !== id);
+  }
+
+  mostrarCarrito();
+}
+
+function vaciarCarrito() {
+  carrito = [];
+  mostrarCarrito();
+  document.getElementById("mensaje-pago").textContent = "";
+}
+
+function mostrarCarrito() {
+  const lista = document.getElementById("lista-carrito");
+  const vacio = document.getElementById("vacio");
+  const contador = carrito.reduce((suma, p) => suma + p.cantidad, 0);
+  const total = carrito.reduce((suma, p) => suma + p.precio * p.cantidad, 0);
+
+  document.getElementById("contador").textContent = contador;
+  document.getElementById("total").textContent = dinero(total);
+  vacio.style.display = carrito.length ? "none" : "block";
+
+  lista.innerHTML = carrito.map(p => `
+    <div class="item-carrito">
+      <img src="${p.imagen}" alt="${p.nombre}">
+      <div class="item-info">
+        <strong>${p.nombre}</strong>
+        <p>${dinero(p.precio * p.cantidad)}</p>
+      </div>
+      <div class="cantidad">
+        <button onclick="cambiarCantidad(${p.id}, -1)" aria-label="Restar">−</button>
+        <span>${p.cantidad}</span>
+        <button onclick="cambiarCantidad(${p.id}, 1)" aria-label="Sumar">+</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+function pagar() {
+  if (carrito.length === 0) {
+    document.getElementById("mensaje-pago").textContent =
+      "Primero agregá algún producto al carrito 🐾";
+    return;
+  }
+
+  document.getElementById("mensaje-pago").textContent =
+    "Esta es una demostración. Para cobrar de verdad, hay que conectar Mercado Pago.";
+  
+  // Para activar pagos reales hay que integrar Mercado Pago de forma segura.
+  // No pongas tu Access Token secreto dentro de este código HTML.
+}
+
+document.getElementById("form-turno").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const nombre = document.getElementById("nombre").value.trim();
+  const telefono = document.getElementById("telefono").value.trim();
+  const mascota = document.getElementById("mascota").value.trim();
+  const servicio = document.getElementById("servicio").value;
+  const fecha = document.getElementById("fecha").value;
+  const comentarios = document.getElementById("comentarios").value.trim();
+
+  // Reemplazá este número por el WhatsApp real del negocio.
+  const numeroWhatsApp = "5491100000000";
+
+  const mensaje =
+    "¡Hola! Quiero consultar por un turno.%0A" +
+    "Nombre: " + encodeURIComponent(nombre) + "%0A" +
+    "Teléfono: " + encodeURIComponent(telefono) + "%0A" +
+    "Mascota: " + encodeURIComponent(mascota) + "%0A" +
+    "Servicio: " + encodeURIComponent(servicio) + "%0A" +
+    "Fecha: " + encodeURIComponent(fecha) + "%0A" +
+    "Comentarios: " + encodeURIComponent(comentarios);
+
+  window.open(
+    "https://wa.me/" + numeroWhatsApp + "?text=" + mensaje,
+    "_blank"
+  );
+});
+
+mostrarProductos();
+mostrarCarrito();
+</script>
+
+</body>
+</html>
